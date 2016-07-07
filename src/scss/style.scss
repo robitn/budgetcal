@@ -1,0 +1,141 @@
+@import "bootstrap/custom";
+
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700);
+
+// $theme-bluish: lighten(dodgerblue, 33%);
+// $theme-orangish: lighten(orange, 25%);
+// $current-theme: $theme-bluish;
+
+/* --------------------
+* A few more resets
+---------------------*/
+
+input:focus,
+button:focus {
+	outline: none!important;
+}
+i.fa {
+	pointer-events: none;
+}
+a.btn-default.btn-pushbutton {
+    background-color: white;
+}
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+	background-color: #FBFBFB;
+}
+
+/* --------------------
+* Layout
+---------------------*/
+
+html,
+body {
+	height: 100%;
+}
+body {
+	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+	color: #333;
+}
+main {
+	// @include display(flex);
+	// @include flex-direction(column);
+	height: 100%;
+	a {
+		// color: $current-theme;
+		text-decoration: none;
+	}
+	h1,
+	h2,
+	h3,
+	h4 {
+		&.theme {
+			margin: 0;
+			// color: $current-theme;
+		}
+	}
+}
+section.com-sagedot-container {
+	// @include display(flex);
+	// @include flex(1);
+	div.com-sagedot-row {
+		// @include display(flex);
+		// @include flex(1);
+		overflow: hidden;
+		div.view3d {
+			// @include flex(1);
+			margin-left: 1px;
+			// border-left: 1px solid $current-theme;
+		}
+		div.widgets {
+			// @include flex-direction(column);
+			padding: 1px 0;
+			&.alpha,
+			&.beta {
+				// @include display(flex);
+			}
+			&.alpha {
+//				@include flex(0 0 400px);
+			}
+			&.beta {
+//				@include flex(0 0 220px);
+			}
+			div.widget {
+				// @include flex(1);
+				margin: 1px;
+				padding: 15px;
+				// border: 1px solid $current-theme;
+				overflow: hidden;
+				&.jog-control {
+					// @include flex(1.33);
+				}
+				&.motion-controller {
+					// @include flex(1);
+				}
+				&.dro {
+					// @include flex(0 0 200px);
+				}
+			}
+		}
+	}
+}
+header,
+footer {
+	padding: 7px;
+}
+header {
+	// border-bottom: 1px solid $current-theme;
+}
+footer {
+	// border-top: 1px solid $current-theme;
+}
+.numeric-readout {
+	div.input-group {
+		width: 15.5em;
+		margin-bottom: 4px;
+		input {
+			height: 33px;
+			text-align: right;
+			font-family: 'Source Code Pro', sans-serif;
+			font-size: 1.25em;
+			font-style: italic;
+			letter-spacing: 1px;
+		}
+	}
+}
+.margin-left-px {
+	margin-left: 5px;
+}
+
+/* --------------------
+* Base Theming
+---------------------*/
+
+small {
+	color: #999;
+}
+.dro .input-group-addon {
+	padding: 6px 10px;
+    font-family: 'Source Code Pro';
+	font-size: 18px;
+    font-weight: 600;
+}

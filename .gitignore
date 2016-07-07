@@ -8,3 +8,6 @@ test/e2e/reports
 build
 config
 test
+public
+src/scss/bootstrap
+static
