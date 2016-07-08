@@ -1,11 +1,13 @@
 <template>
-	<div class="year-view">
-		<month-thumbnail v-for="month in 12" :month="month" :year="currentYear"></month-thumbnail>
+	<div class="year-view" transition="hyde" v-show="show">
+		<month-thumbnail v-for="month in 12" :month="month" :year="currentYear" :today="today"></month-thumbnail>
 	</div>
 </template>
 
 <script>
 import MonthThumbnail from './month-thumbnail'
+
+let show = true
 
 export default {
 
@@ -13,35 +15,38 @@ export default {
 		currentYear: {
 			type: Number,
 			required: true
+		},
+		today: {
+			type: String,
+			required: true
 		}
 	},
-	computed: {
-		breakRow: function () {
-			if (this.month % 3 == 0) {
-				return '<br>'
-			}
-			return '\n'
+	data() {
+		return {
+			show
 		}
 	},
+	computed: {},
 	events: {
-		'month-thumbnail-select': function (data) {
-			console.log( data );
-			alert('Expand thumbnail: "' + data.thumbId + '"\n' 
-				+ "top:    " + data.$el.offsetTop + ',\n' 
-				+ "left:    " + data.$el.offsetLeft + ', \n'
-				+ "width:  " + data.$el.offsetWidth + ', \n'
-				+ "height: " + data.$el.offsetHeight )
+		'show-month-view': function(data) {
+			this.show = false
+		},
+		'hide-month-view': function() {
+			this.show = true
 		}
 	},
-	methods: {},
-	data () {
-		return {}
+	methods: {
+		hideMe() {
+			this.$dispatch('hide-month-view')
+			this.show = false
+		}
 	},
 	components: {
 		MonthThumbnail
 	},
 	ready: function () {
-		// console.log( this );
+		this.$broadcast('remove-badges')
+		this.$broadcast('badge-today', '#ds-' + this.today)
 	}
 }
 
@@ -53,6 +58,13 @@ export default {
 	max-width: 360px;
 	margin-right: auto;
 	margin-left: auto;
+	&.hyde-transition {
+		transition: transform 0.3s ease;
+		transform: translate3d(0, 0, 0);
+		&.hyde-enter, &.hyde-leave {
+			transform: scale3d(0.9, 1, 1) translate3d(-20%, 0, 0);
+		}
+	}
 }
 
 </style>

@@ -16,6 +16,9 @@ let thumbnailId = ''
 export default {
 
 	props: {
+		today: {
+			type: String
+		},
 		month: {
 			type: Number
 		},
@@ -44,7 +47,10 @@ export default {
 					if (x > startOfMonth) {
 						dcnt++
 						if (dcnt <= daysInMonth) {
-							td.push('<td>' + dcnt + '</td>')
+							let timeStamp = now.date(dcnt).format('YYYYMMDD'),
+								tdTag = '<td id="ds-' + timeStamp + '">'
+
+							td.push(tdTag + '<span>' + dcnt + '</span>' + '</td>')
 						}
 					} 
 					else {
@@ -61,10 +67,25 @@ export default {
 			return this.thumbnailId
 		}
 	},
-	events: {},
+	events: {
+		'badge-today' : function (data) {
+			let myEl = document.querySelector(data)
+
+			myEl.className = 'today'
+		},
+		'remove-badges': function () {
+			let myEls = document.querySelectorAll('#' + this.thumbnailId + ' td')
+
+			for (let el in myEls) {
+				if (!isNaN(el)) {
+					myEls[el].classList.remove('today')
+				}
+			}			
+		}
+	},
 	methods: {
 		clickThumb() {
-			this.$dispatch( 'month-thumbnail-select', this )
+			this.$dispatch('month-thumbnail-select', this)
 		}
 	},
 	components: {
@@ -83,6 +104,7 @@ export default {
 	.inner-box {
 		margin: 4px;
 		header {
+			padding-bottom: 0;
 			font-size: 12px;
 			font-weight: bold;
 			text-align: center;
@@ -92,9 +114,23 @@ export default {
 			border-collapse: separate;
 			border-spacing: 2px;
 			td {
-				font-size: 9px;
-				text-align: right;
+				line-height: 1;
+				span {
+					display: inline-block;
+					width: 12px;
+					height: 12px;
+					border-radius: 10px;
+					line-height: 1.4;
+					font-size: 9px;
+					text-align: center;
+				}
 			}
+		}
+	}
+	td.today {
+		span {
+			background-color: red;
+			color: white;
 		}
 	}
 }
