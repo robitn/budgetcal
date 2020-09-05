@@ -47,7 +47,7 @@
     "karma-webpack": "^1.7.0",
     "lolex": "^1.4.0",
     "mocha": "^2.4.5",
-    "node-sass": "^3.8.0",
+    "node-sass": ">=4.13.1",
     "sass-loader": "^4.0.0",
     "chai": "^3.5.0",
     "sinon": "^1.17.3",
